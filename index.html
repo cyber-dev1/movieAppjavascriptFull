@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <style>
+    *::before,
+    *::after,
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      &::-webkit-scrollbar{
+        background-color: rgba(28, 28, 28, 0.966);
+        border: 1px solid transparent;
+        outline: 1px solid transparent;
+      }
+      &::-webkit-scrollbar-thumb{
+        border-radius: 4px;
+        background-color: white;
+        cursor: pointer;
+      }
+    }
+    
+    mark {
+      padding-inline: 0;
+      background: green;
+    }
+
+    .movie__card {
+      min-height: 320px;
+    }
+
+    .movie__bookmark_card {
+      min-height: 320px;
+    }
+
+    .loading-svg {
+      width: 360px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    ;
+  </style>
+</head>
+
+<body>
+
+  <header class="site__header position-sticky top-0 text-center text-light py-3 bg-dark" style="z-index: 1">
+    <div class="container">
+      <h2>The Movie App</h2>
+    </div>
+  </header>
+  <template class="js-movie-template">
+    <div class="movies__item col-3 my-3 js-movie-item">
+      <div class="movie__card card">
+        <img class="movie__img card-img-top js-movie-image" width="300" height="170" src="https://picsum.photos/300/170"
+          alt="Movie image" />
+        <div class="card-body">
+          <h3 class="movie__title h5 card-title js-movie-title">
+            Movie Title
+          </h3>
+          <div class="d-flex small justify-content-between flex-wrap py-2">
+            <span class="d-flex align-items-center">
+              <img src="./images/star.svg" width="16" height="16" alt="Star-image" />
+              <span class="movie__ratingm me-2 ms-1 js-movie-rating">7</span>
+            </span>
+            <span class="d-flex align-items-center">
+              <img src="./images/year.svg" width="16" height="16" alt="Year-image" />
+              <span class="movie__year ms-1 js-movie-year">2007</span>
+            </span>
+            <span class="d-flex align-items-center">
+              <img src="./images/watch.svg" width="16" height="16" alt="Watch-image" />
+              <span class="movie__duration me-2 js-movie-runtime">1 hr 20 min</span>
+            </span>
+          </div>
+          <p class="movie__categories card-text js-movie-categories">
+            Thriller, Comedy, Action
+          </p>
+          <button class="btn btn-info text-light btn-md d-block w-100 js-more-info" data-bs-toggle="modal"
+            data-bs-target="#movie-more-modal" style="font-size: 16px;">
+            More info
+          </button>
+          <button
+            class="js-bookmark  btn btn-warning mt-3 d-block w-100 btn-md d-flex align-items-center justify-content-center"
+            style="font-size: 16px;">
+            <span class="js-material-symbols-outlined text-light me-2" style="font-size: 16px;">
+              Del Bookmark
+            </span>
+            <span class="js-add-bookmark">
+              Add Bookmark
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+  </div>
+  <main>
+    <section class="movies mt-3">
+      <div class="container position-relative">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Bookmark Movies</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body  text-center">
+                <p class="text-danger text-center js-alert-bookmark">No movies saved yet !!</p>
+                <div class="rebders_ul js-render-bookmark">
+
+
+                </div>
+                <template class="js-movies-bookmark-temp">
+                  <div class="movie__bookmark_card card mb-5 js-bookmark-movie  text-center mx-auto"
+                    style="width: 60%;">
+                    <img class="movie__img card-img-top js-bookmark-movie-image" width="200" height="170"
+                      src="https://picsum.photos/200/170" alt="Movie image" />
+                    <div class="card-body">
+                      <h3 class="movie__title card-title js-bookmark-movie-title">
+
+                      </h3>
+                      <div class="d-flex small justify-content-between flex-wrap py-2">
+                        <a class="movie__imbdb js-bookmark-movie-imdb mt-3 mx-auto" href="" target="_blank">More Info
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                  
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary  js-delete-all-movies" data-bs-dismiss="modal">Delete All Movies</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="alert alert-danger d-none js-not-found-movie" id="alert" role="alert"></p>
+        <div class="d-flex align-items-center justify-content-between"
+          style="position: relative; transform: translateX(1300px); position: fixed;">
+          <button class=" btn btn-success js-bookmark-count" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <img src="./images/bookmark_added_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="bookmark">
+          </button>
+          <p class="js-count d-none bg-danger rounded-pill text-center text-light"
+            style="padding: 0px 15px 0px 15px; left: 30px; bottom: 9px; min-width: 20px; min-height: 20px; position: absolute;">
+          </p>
+        </div>
+        <div class="movies__inner-form-box">
+          <form class="js-form d-flex align-items-center">
+            <input class="form-control js-search-input" type="text" placeholder="Search movie ..." name="search"
+              aria-label="Search movie ..." id="search" />
+            <input class="form-control js-min-year-input mx-2" type="text" placeholder="Min year ..." name="min"
+              min="2000" aria-label="Min year " id="min" />
+            <input class="form-control js-max-year-input" type="text" placeholder="Max year ..." name="max"
+              aria-label="Search movie ..." id="max" max="2018" />
+            <select class="form-control mx-2 js-categories-select" name="categorie" aria-label="Enter categorie movie "
+              id="categorie" style="cursor: pointer;">
+              <option value="all">All</option>
+            </select>
+
+            <select class="form-control js-sort-select me-2" name="sort" aria-label="Enter sort movie " id="sort"
+              style="cursor: pointer;">
+              <option value="" selected disabled hidden>Sort Movies</option>
+              <option value="a-z">A-Z</option>
+              <option value="z-a">Z-A</option>
+              <option value="old-year">Old Year</option>
+              <option value="new-year">New Year</option>
+            </select>
+            <button class="btn btn-primary">Search</button>
+          </form>
+        </div>
+        <div class="movies__inner row js-movie-list">
+          <img class="loading-svg" src="./images/loader.svg" alt="Movie is loading...">
+        </div>
+      </div>
+    </section>
+  </main>
+  <div class="modal fade js-movie-modal" id="movie-more-modal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="
+          min-width: 1100px !important;
+          max-width: 1100px !important;
+          width: 1100px !important;
+        ">
+      <div class="modal-content w-100 mx-auto">
+        <div class="modal-header">
+          <h3 class="modal-title" id="movie-more-modal">Movie data</h3>
+          <button class="btn btn-danger btn-small p-0 px-2 fs-5 d-flex align-items-center" type="button" class="close"
+            data-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#movie-more-modal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body js-modal-body">
+          <div class="row justify-content-between align-items-stretch">
+            <div class="col-md-5">
+              <iframe class="js-movie-iframe" width="500" height="360" src="" title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+            <div class="col-md-6">
+              <h3 class="movie-title js-movie-modal-title">
+                Lorem, ipsum dolor.
+              </h3>
+              <div class="d-flex small justify-content-between flex-wrap py-2">
+                <span class="d-flex align-items-center">
+                  <img src="./images/star.svg" width="16" height="16" alt="Star-image" />
+                  <span class="movie__ratingm me-2 ms-1 js-movie-rating">7</span>
+                </span>
+                <span class="d-flex align-items-center">
+                  <img src="./images/year.svg" width="16" height="16" alt="Year-image" />
+                  <span class="movie__year ms-1 js-movie-year">2007</span>
+                </span>
+                <span class="d-flex align-items-center">
+                  <img src="./images/watch.svg" width="16" height="16" alt="Watch-image" />
+                  <span class="movie__duration me-2 js-movie-runtime">1 hr 20 min</span>
+                </span>
+              </div>
+              <p class="movie__categories card-text js-movie-categori">
+                Thriller, Comedy, Action
+              </p>
+              <p class="movie__summary card-text js-movie-summary"></p>
+              <a class="movie__imbdb js-movie-imdb" href="" target="_blank">More info IMDB</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="./bootstrap/js/bootstrap.min.js"></script>
+  <script src="./Javascript/movies.js"></script>
+  <script src="./Javascript/index.js"></script>
+</body>
+
+</html>
